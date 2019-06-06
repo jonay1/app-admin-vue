@@ -82,3 +82,14 @@ service.interceptors.response.use(
 )
 
 export default service
+
+export function restful(url) {
+    let services = {}
+    let methods = ['get', 'post', 'delete', 'put']
+    methods.forEach(method => {
+        services[method] = (data) => {
+            return service[method](url, data)
+        }
+    })
+    return services
+}

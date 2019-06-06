@@ -60,14 +60,14 @@ const mutations = {
 
 const actions = {
     generateRoutes({commit}, funcs, isadmin) {
-        let accessedRoutes
-        if (isadmin) {
-            accessedRoutes = dynamicRoutes || []
-        } else {
-            accessedRoutes = filterRoutes(dynamicRoutes, funcs)
-        }
-        commit('SET_ROUTES', accessedRoutes)
-        return accessedRoutes
+        // let accessedRoutes
+        // if (isadmin) {
+        //     accessedRoutes = dynamicRoutes || []
+        // } else {
+        //     accessedRoutes = filterRoutes(dynamicRoutes, funcs)
+        // }
+        commit('SET_ROUTES', dynamicRoutes)
+        return dynamicRoutes
     },
     // user login
     login({commit}, userInfo) {

@@ -32,42 +32,7 @@ const routes = [
                 component: () => import('@/views/redirect/index')
             }
         ]
-    },
-    {
-        path: '/',
-        component: Layout,
-        redirect: '/dashboard',
-        children: [
-            {
-                path: 'dashboard',
-                component: () => import('@/views/dashboard/index'),
-                name: 'Dashboard',
-                meta: {title: '主页', icon: 'dashboard', affix: true}
-            },
-            {
-                path: 'profile',
-                component: () => import('@/views/profile/index'),
-                name: 'Profile',
-                hidden: true,
-                meta: {title: '个人中心', icon: 'user', noCache: true}
-            }
-        ]
-    },
-    {
-        path: '/tool',
-        redirect: 'noRedirect',
-        component: Layout,
-        meta: {icon: 'guide', title: '工具箱'},
-        alwaysShow: true,
-        children: [
-            {
-                path: 'icon',
-                component: () => import('@/views/icons'),
-                name: 'Icons',
-                meta: {id: 91, title: '图标', icon: 'icon', cache: false}
-            }
-        ]
-    },
+    }
 
 ]
 export default routes

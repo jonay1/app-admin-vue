@@ -1,7 +1,7 @@
-import http from '@/utils/http'
+import http, {restful} from '@/utils/http'
+
+let service = restful('/role')
 
 export default {
-    list(query) {
-        return http.post('/roles', query)
-    }
+    ...service
 }

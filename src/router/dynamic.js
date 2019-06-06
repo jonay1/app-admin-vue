@@ -18,17 +18,56 @@
  */
 export const routes = [
     {
+        path: '/',
+        component: () => import('@/views/layout'),
+        redirect: '/dashboard',
+        children: [
+            {
+                path: 'dashboard',
+                component: () => import('@/views/dashboard'),
+                name: 'Dashboard',
+                meta: {title: '主页', icon: 'dashboard', affix: true}
+            },
+            {
+                path: 'profile',
+                component: () => import('@/views/profile'),
+                name: 'Profile',
+                hidden: true,
+                meta: {title: '个人中心', icon: 'user', noCache: true}
+            }
+        ]
+    },
+    {
+        id:10,
         path: '/sys',
         redirect: 'noRedirect',
-        component: () => import('@/views/layout/index'),
+        component: () => import('@/views/layout'),
         meta: {icon: 'component', title: '配置管理'},
         alwaysShow: true,
         children: [
             {
+                id:11,
                 path: 'role',
-                component: () => import('@/views/sys/role/index'),
+                component: () => import('@/views/sys/role'),
                 name: 'RoleMng',
                 meta: {id: 11, title: '角色管理', icon: 'user', cache: true}
+            }
+        ]
+    },
+    {
+        id:90,
+        path: '/tool',
+        redirect: 'noRedirect',
+        component: () => import('@/views/layout'),
+        meta: {icon: 'guide', title: '工具箱'},
+        alwaysShow: true,
+        children: [
+            {
+                id:91,
+                path: 'icon',
+                component: () => import('@/views/icons'),
+                name: 'Icons',
+                meta: {id: 91, title: '图标', icon: 'icon', cache: false}
             }
         ]
     },

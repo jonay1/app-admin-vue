@@ -37,9 +37,7 @@ export default function filter(router) {
                         const {funcs, name} = await store.dispatch('user/getInfo')
 
                         // generate accessible routes map based on roles
-                        const accessRoutes = await store.dispatch('user/generateRoutes', funcs, name == 'admin')
-                        console.log('loading latest routes')
-                        console.log(accessRoutes)
+                        const accessRoutes = await store.dispatch('user/generateRoutes', funcs)
 
                         // dynamically add accessible routes
                         router.addRoutes(accessRoutes)

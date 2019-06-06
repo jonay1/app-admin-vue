@@ -12,7 +12,6 @@ import Cookies from 'js-cookie'
 import * as filters from './filters' // global filters
 
 Vue.config.productionTip = false
-console.log(store)
 Vue.use(ElementUI, {
     size: store.getters.size // set element-ui default size
 })
