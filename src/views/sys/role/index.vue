@@ -1,13 +1,12 @@
 <template>
     <div class="app-container">
         <div class="filter-container">
-            <el-input v-model="query.q" placeholder="ID/名称" style="width: 200px;" class="filter-item"
+            <el-input v-model="query.q" placeholder="ID/名称" :clearable="true" class="filter-input filter-item"
                       @keyup.enter.native="handleSearch"/>
             <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleSearch">
                 搜索
             </el-button>
-            <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline"
-                       @click="handleAdd">
+            <el-button class="filter-item" type="primary" icon="el-icon-circle-plus-outline" @click="handleAdd">
                 新增
             </el-button>
         </div>
@@ -34,10 +33,10 @@
         <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑':'新增'">
             <el-form ref="form" :rules="rules" :model="data" label-width="100px" label-position="right">
                 <el-form-item label="角色ID" prop="id">
-                    <el-input v-model="data.id" placeholder="2~10个英文" :disabled="dialogType=='edit'"/>
+                    <el-input v-model="data.id" placeholder="2~10个英文" :clearable="true" :disabled="dialogType=='edit'"/>
                 </el-form-item>
                 <el-form-item label="角色名称" prop="name">
-                    <el-input v-model="data.name" placeholder="中文名称"/>
+                    <el-input v-model="data.name" placeholder="中文名称" :clearable="true"/>
                 </el-form-item>
                 <el-form-item label="功能权限" prop="funcs">
                     <el-tree
@@ -201,6 +200,14 @@
 
 <style lang="scss" scoped>
     .app-container {
+
+        .filter-input {
+            width: 220px;
+        }
+
+        .filter-item {
+            margin: 0 10px 0 0;
+        }
 
         .btn {
             cursor: pointer;

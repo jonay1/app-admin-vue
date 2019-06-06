@@ -1,7 +1,6 @@
 <template>
     <div class="dashboard-container">
-        Hello world
-        <svg-icon class-name="search-icon" icon-class="search"/>
+        本示例数据全部是模拟数据
     </div>
 </template>
 
