@@ -118,7 +118,7 @@
                 this.$confirm(`确认删除角色: ${row.name}`, '删除', {
                     type: 'warning'
                 }).then(() => {
-                    api.delete(row.key).then(() => {
+                    api.del(row.id).then(() => {
                         this.list.splice($index, 1)
                         this.$message({
                             type: 'success',
@@ -134,7 +134,7 @@
                         this.data.funcs = this.$refs.tree.getCheckedKeys()
                         const isEdit = this.dialogType === 'edit'
                         if (isEdit) {
-                            api.put(this.data).then((data) => {
+                            api.update(this.data).then((data) => {
                                 let tmp = this.list.filter(item => {
                                     return item.id = this.data.id
                                 })
@@ -146,7 +146,7 @@
                                 });
                             })
                         } else {
-                            api.post(this.data).then((data) => {
+                            api.add(this.data).then((data) => {
                                 this.list.push(this.data)
                                 this.dialogVisible = false
                                 this.$message({
@@ -182,7 +182,7 @@
             },
         },
         mounted() {
-            api.get(this.query).then((data) => {
+            api.list(this.query).then((data) => {
                 this.list = data
             })
         },
