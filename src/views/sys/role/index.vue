@@ -34,7 +34,7 @@
         <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑':'新增'">
             <el-form :model="data" label-width="100px" label-position="right">
                 <el-form-item label="角色ID">
-                    <el-input v-model="data.id" placeholder="2~10个英文"/>
+                    <el-input v-model="data.id" placeholder="2~10个英文" :disabled="dialogType=='edit'"/>
                 </el-form-item>
                 <el-form-item label="角色名称">
                     <el-input v-model="data.name" placeholder="中文名称"/>
