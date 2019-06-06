@@ -32,14 +32,14 @@
         </el-table>
 
         <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑':'新增'">
-            <el-form :model="data" label-width="100px" label-position="right">
-                <el-form-item label="角色ID">
+            <el-form ref="form" :rules="rules" :model="data" label-width="100px" label-position="right">
+                <el-form-item label="角色ID" prop="id">
                     <el-input v-model="data.id" placeholder="2~10个英文" :disabled="dialogType=='edit'"/>
                 </el-form-item>
-                <el-form-item label="角色名称">
+                <el-form-item label="角色名称" prop="name">
                     <el-input v-model="data.name" placeholder="中文名称"/>
                 </el-form-item>
-                <el-form-item label="功能权限">
+                <el-form-item label="功能权限" prop="funcs">
                     <el-tree
                             ref="tree"
                             :data="funcList"
@@ -88,9 +88,8 @@
                 dialogVisible: false,
                 dialogType: 'new',
                 rules: {
-                    type: [{required: true, message: 'type is required', trigger: 'change'}],
-                    timestamp: [{type: 'date', required: true, message: 'timestamp is required', trigger: 'change'}],
-                    title: [{required: true, message: 'title is required', trigger: 'blur'}]
+                    id: [{required: true, message: '请填写角色ID'}],
+                    name: [{required: true, message: '请填写角色名称'}]
                 }
             }
         },
@@ -130,31 +129,37 @@
                 })
             },
             handleSave() {
-                this.data.funcs = this.$refs.tree.getCheckedKeys()
-                const isEdit = this.dialogType === 'edit'
-                if (isEdit) {
-                    api.put(this.data).then((data) => {
-                        let tmp = this.list.filter(item => {
-                            return item.id = this.data.id
-                        })
-                        deepClone(tmp, this.data)
-                        this.dialogVisible = false
-                        this.$message({
-                            message: '操作成功',
-                            type: 'success'
-                        });
-                    })
-                } else {
-                    api.post(this.data).then((data) => {
-                        this.list.push(this.data)
-                        this.dialogVisible = false
-                        this.$message({
-                            message: '操作成功',
-                            type: 'success'
-                        });
-                    })
-                }
-
+                this.$refs.form.validate((valid) => {
+                    if (valid) {
+                        this.data.funcs = this.$refs.tree.getCheckedKeys()
+                        const isEdit = this.dialogType === 'edit'
+                        if (isEdit) {
+                            api.put(this.data).then((data) => {
+                                let tmp = this.list.filter(item => {
+                                    return item.id = this.data.id
+                                })
+                                deepClone(tmp, this.data)
+                                this.dialogVisible = false
+                                this.$message({
+                                    message: '操作成功',
+                                    type: 'success'
+                                });
+                            })
+                        } else {
+                            api.post(this.data).then((data) => {
+                                this.list.push(this.data)
+                                this.dialogVisible = false
+                                this.$message({
+                                    message: '操作成功',
+                                    type: 'success'
+                                });
+                            })
+                        }
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
             generateTreeData(routes) {
                 const res = []
