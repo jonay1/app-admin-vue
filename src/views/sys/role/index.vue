@@ -70,7 +70,7 @@
         funcs: []
     }
     export default {
-        name: "index",
+        name: "RoleMng",
         data() {
             return {
                 tableKey: 0,
@@ -80,7 +80,7 @@
                 total: 0,
                 listLoading: true,
                 query: {
-                    q: undefined,
+                    q: '',
                     page: 1,
                     limit: 20
                 },
@@ -96,7 +96,7 @@
         },
         methods: {
             handleAdd() {
-                this.data = Object.assign({}, defaultRole)
+                this.data = deepClone(defaultRole)
                 if (this.$refs.tree) {
                     this.$refs.tree.setCheckedNodes([])
                 }
@@ -130,15 +130,14 @@
                 })
             },
             handleSave() {
-                const checkedKeys = this.$refs.tree.getCheckedKeys()
+                this.data.funcs = this.$refs.tree.getCheckedKeys()
                 const isEdit = this.dialogType === 'edit'
                 if (isEdit) {
                     api.put(this.data).then((data) => {
                         let tmp = this.list.filter(item => {
                             return item.id = this.data.id
                         })
-                        debugger
-                        Object.assign(tmp, this.data)
+                        deepClone(tmp, this.data)
                         this.dialogVisible = false
                         this.$message({
                             message: '操作成功',

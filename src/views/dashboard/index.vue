@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard-container">
         Hello world
-        <svg-icon class-name="search-icon" icon-class="search" />
+        <svg-icon class-name="search-icon" icon-class="search"/>
     </div>
 </template>
 
@@ -13,7 +13,8 @@
         data() {
             return {}
         },
-        computed: {},
+        mounted() {
+        },
         created() {
         }
     }

@@ -38,7 +38,7 @@ export const routes = [
         ]
     },
     {
-        id:10,
+        id: 10,
         path: '/sys',
         redirect: 'noRedirect',
         component: () => import('@/views/layout'),
@@ -46,16 +46,16 @@ export const routes = [
         alwaysShow: true,
         children: [
             {
-                id:11,
+                id: 11,
                 path: 'role',
                 component: () => import('@/views/sys/role'),
                 name: 'RoleMng',
-                meta: {id: 11, title: '角色管理', icon: 'user', cache: true}
+                meta: {title: '角色管理', icon: 'user', cache: true}
             }
         ]
     },
     {
-        id:90,
+        id: 90,
         path: '/tool',
         redirect: 'noRedirect',
         component: () => import('@/views/layout'),
@@ -63,11 +63,11 @@ export const routes = [
         alwaysShow: true,
         children: [
             {
-                id:91,
+                id: 91,
                 path: 'icon',
                 component: () => import('@/views/icons'),
                 name: 'Icons',
-                meta: {id: 91, title: '图标', icon: 'icon', cache: false}
+                meta: {title: '图标', icon: 'icon', cache: false}
             }
         ]
     },
